@@ -2,59 +2,19 @@
              TemplateHaskell, GADTs, FlexibleInstances,
              MultiParamTypeClasses, DeriveDataTypeable,
              GeneralizedNewtypeDeriving, ViewPatterns, EmptyDataDecls #-}
-             
-
+ 
+module CadastroLoja where
 
 import Yesod
-import Database.Persist.Postgresql
-import Data.Text
+import Yesod.Core
 import Control.Monad.Logger (runStdoutLoggingT)
 import Control.Applicative
+import Data.Text
 
-data Pagina = Pagina{connPool :: ConnectionPool}
+import Database.Persist.Postgresql
 
-instance Yesod Pagina
-
-share [mkPersist sqlSettings, mkMigrate "migrateAll"] [persistLowerCase|
-
-Loja json
-    nomeFantasia Text
-    cnpj Text
-    logradouro Text
-    numero Text
-    cep Text
-    bairro Text
-    cidade Text
-    estado Text
-    telefone Text
-    email Text
-    nomeDoResponsavel Text
-    cpfDoResponsavel Text
-    rgDoResponsavel Text
-
-|]
-
-mkYesod "Pagina" [parseRoutes|
-/ HomeR GET
-/loja/cadastro LojaR GET POST
-/loja/checar/#LojaId ChecarLojaR GET
-/lojas LojasR GET
-/erro ErroR GET
-|]
-
-instance YesodPersist Pagina where
-   type YesodPersistBackend Pagina = SqlBackend
-   runDB f = do
-       master <- getYesod
-       let pool = connPool master
-       runSqlPool f pool
-
-type Form a = Html -> MForm Handler (FormResult a, Widget)
-
-instance RenderMessage Pagina FormMessage where
-    renderMessage _ _ = defaultFormMessage
-------------------------
-
+mkYesodDispatch "Pagina" pRoutes
+instance Yesod Pagina where
 
 formLoja :: Form Loja
 formLoja = renderDivs $ Loja <$>
@@ -107,18 +67,6 @@ getLojasR = do
 getHomeR :: Handler Html
 getHomeR = defaultLayout [whamlet|Where's Pet!|]
 
-{-getHomeR :: Handler Html
-getHomeR = do defaultLayout
-defaultLayout $ do 
-           toWidget [cassius|
-               label
-                color:black;
-                font-weight: bold;
-                |]
--}
-
-
-
 
 getChecarLojaR :: LojaId -> Handler Html
 getChecarLojaR pid = do
@@ -134,14 +82,6 @@ getChecarLojaR pid = do
 
 getErroR :: Handler Html
 getErroR = defaultLayout [whamlet|
-    cadastro deu pau com sucesso
+              <p>
+                cadastro deu pau com sucesso
 |]
-
-
-connStr = "dbname=d6u0i7sja7bad0 host=ec2-54-243-249-176.compute-1.amazonaws.com user=pibvccpjrprgfb password=nMw0gAWUxdfJkNiL38JKbkuOBo"
-
-main::IO()
-main = runStdoutLoggingT $ withPostgresqlPool connStr 10 $ \pool -> liftIO $ do 
-       runSqlPersistMPool (runMigration migrateAll) pool
-       warp 8080 (Pagina pool)
-       
