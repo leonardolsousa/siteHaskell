@@ -4,15 +4,15 @@
              GeneralizedNewtypeDeriving, ViewPatterns, EmptyDataDecls #-}
  
 module CadastroLoja where
-
+import Rotas
 import Yesod
 import Yesod.Core
+import Tabelas
 import Control.Monad.Logger (runStdoutLoggingT)
 import Control.Applicative
 import Data.Text
-import Database.Persist.Postgresql
-import Tabelas
 
+import Database.Persist.Postgresql
 
 mkYesodDispatch "Pagina" pRoutes
 instance Yesod Pagina where

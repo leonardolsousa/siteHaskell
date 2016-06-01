@@ -4,7 +4,7 @@
              GeneralizedNewtypeDeriving, ViewPatterns, EmptyDataDecls #-}
 
 module Tabelas where
-
+import Rotas
 import Yesod
 import Data.Text
 import Database.Persist.Postgresql
