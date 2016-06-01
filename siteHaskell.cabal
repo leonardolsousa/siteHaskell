@@ -40,4 +40,5 @@ executable         siteHaskell
                  , shakespeare
                  
    
-   other-modules: CadastroLoja
+   other-modules: CadastroLoja,
+                  Tabelas

@@ -13,30 +13,8 @@ import Control.Monad.Logger (runStdoutLoggingT)
 import Control.Applicative
 
 import CadastroLoja
+import Tabelas
 
-
-data Pagina = Pagina{connPool :: ConnectionPool}
-
-instance Yesod Pagina
-
-share [mkPersist sqlSettings, mkMigrate "migrateAll"] [persistLowerCase|
-
-Loja json
-    nomeFantasia Text
-    cnpj Text
-    logradouro Text
-    numero Text
-    cep Text
-    bairro Text
-    cidade Text
-    estado Text
-    telefone Text
-    email Text
-    nomeDoResponsavel Text
-    cpfDoResponsavel Text
-    rgDoResponsavel Text
-
-|]
 
 mkYesod "Pagina" [parseRoutes|
 / HomeR GET POST
@@ -45,19 +23,6 @@ mkYesod "Pagina" [parseRoutes|
 /lojas LojasR GET
 /erro ErroR GET
 |]
-
-instance YesodPersist Pagina where
-   type YesodPersistBackend Pagina = SqlBackend
-   runDB f = do
-       master <- getYesod
-       let pool = connPool master
-       runSqlPool f pool
-
-type Form a = Html -> MForm Handler (FormResult a, Widget)
-
-instance RenderMessage Pagina FormMessage where
-    renderMessage _ _ = defaultFormMessage
-------------------------
 
 
 connStr = "dbname=d6u0i7sja7bad0 host=ec2-54-243-249-176.compute-1.amazonaws.com user=pibvccpjrprgfb password=nMw0gAWUxdfJkNiL38JKbkuOBo port=5432"

@@ -11,7 +11,7 @@ import Control.Monad.Logger (runStdoutLoggingT)
 import Control.Applicative
 import Data.Text
 import Database.Persist.Postgresql
-
+import Tabelas
 
 
 mkYesodDispatch "Pagina" pRoutes
