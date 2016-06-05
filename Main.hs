@@ -7,6 +7,7 @@ module Main where
 
 
 import Yesod
+import Yesod.Static
 import Database.Persist.Postgresql
 import Data.Text
 import Control.Monad.Logger (runStdoutLoggingT)
@@ -21,6 +22,7 @@ connStr = "dbname=d6u0i7sja7bad0 host=ec2-54-243-249-176.compute-1.amazonaws.com
 
 main::IO()
 main = runStdoutLoggingT $ withPostgresqlPool connStr 10 $ \pool -> liftIO $ do 
-       runSqlPersistMPool (runMigration migrateAll) pool
-       warp 8080 (Pagina pool)
+       runSqlPersistMPool (runMigration migrateAll) pool 
+       t@(Static settings) <- static "static"
+       warp 8080 (Pagina t pool)
        
