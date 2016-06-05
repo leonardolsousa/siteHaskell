@@ -40,6 +40,8 @@ instance YesodPersist Pagina where
        let pool = connPool master
        runSqlPool f pool
 
+instance Yesod Pagina where
+
 type Form a = Html -> MForm Handler (FormResult a, Widget)
 
 instance RenderMessage Pagina FormMessage where

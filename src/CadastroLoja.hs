@@ -15,23 +15,40 @@ import Data.Text
 import Database.Persist.Postgresql
 
 mkYesodDispatch "Pagina" pRoutes
-instance Yesod Pagina where
+
 
 formLoja :: Form Loja
 formLoja = renderDivs $ Loja <$>
            areq textField "Nome Fantasia: " Nothing <*>
-           areq textField "CNPJ: " Nothing <*>
+           areq textField  FieldSettings{fsId=Just "hident2",
+                           fsLabel="CNPJ",
+                           fsTooltip= Nothing,
+                           fsName= Nothing,
+                           fsAttrs=[("maxlength","18")]} Nothing <*>
            areq textField "Logradouro: " Nothing <*>
            areq textField "Número: " Nothing <*>
-           areq textField "CEP: " Nothing <*>
+           areq textField  FieldSettings{fsId=Just "hident5",
+                           fsLabel="CEP",
+                           fsTooltip= Nothing,
+                           fsName= Nothing,
+                           fsAttrs=[("maxlength","9")]} Nothing <*> 
            areq textField "Bairro: " Nothing <*>
            areq textField "Cidade: " Nothing <*>
            areq textField "Estado: " Nothing <*>
            areq textField "Telefone: " Nothing <*>
            areq textField "E-mail: " Nothing <*>
            areq textField "Nome do Responsável: " Nothing <*>
-           areq textField "CPF do Responsável: " Nothing <*>
-           areq textField "RG do Responsável: " Nothing
+           areq textField  FieldSettings{fsId=Just "hident11",
+                           fsLabel="CPF do Responsável",
+                           fsTooltip= Nothing,
+                           fsName= Nothing,
+                           fsAttrs=[("maxlength","14")]} Nothing <*>
+           areq textField  FieldSettings{fsId=Just "hident12",
+                           fsLabel="RG do Responsável",
+                           fsTooltip= Nothing,
+                           fsName= Nothing,
+                           fsAttrs=[("maxlength","12")]} Nothing 
+
 
 getLojaR :: Handler Html
 getLojaR = do
@@ -43,6 +60,7 @@ getLojaR = do
                    font-weight: bold;
            |]
            [whamlet|
+           
                  <form method=post enctype=#{enctype} action=@{LojaR}>
                      ^{widget}
                      <input type="submit" value="Enviar">
