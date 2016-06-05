@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings, TypeFamilies, QuasiQuotes,
+{{-# LANGUAGE OverloadedStrings, TypeFamilies, QuasiQuotes,
              TemplateHaskell, GADTs, FlexibleInstances,
              MultiParamTypeClasses, DeriveDataTypeable,
              GeneralizedNewtypeDeriving, ViewPatterns, EmptyDataDecls #-}
@@ -6,11 +6,12 @@
 module Tabelas where
 import Rotas
 import Yesod
+import Yesod.Static
 import Data.Text
 import Database.Persist.Postgresql
     ( ConnectionPool, SqlBackend, runSqlPool, runMigration )
 
-data Pagina = Pagina {connPool :: ConnectionPool }
+data Pagina = Pagina {getStatic :: Static, connPool :: ConnectionPool }
 
 share [mkPersist sqlSettings, mkMigrate "migrateAll"] [persistLowerCase|
 
@@ -30,6 +31,8 @@ Loja json
     rgDoResponsavel Text
 
 |]
+
+staticFiles "static"
 
 mkYesodData "Pagina" pRoutes
 

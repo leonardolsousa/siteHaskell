@@ -13,4 +13,5 @@ pRoutes = [parseRoutes|
    /loja/checar/#LojaId ChecarLojaR GET
    /lojas LojasR GET
    /erro ErroR GET
+   /static StaticR Static getStatic
 |]
