@@ -1,7 +1,7 @@
-{{-# LANGUAGE OverloadedStrings, TypeFamilies, QuasiQuotes,
-             TemplateHaskell, GADTs, FlexibleInstances,
+{-# LANGUAGE OverloadedStrings, TypeFamilies, QuasiQuotes,
+             TemplateHaskell, GADTs, FlexibleContexts,
              MultiParamTypeClasses, DeriveDataTypeable,
-             GeneralizedNewtypeDeriving, ViewPatterns, EmptyDataDecls #-}
+             GeneralizedNewtypeDeriving, EmptyDataDecls, ViewPatterns #-}
 
 module Tabelas where
 import Rotas
@@ -29,6 +29,14 @@ Loja json
     nomeDoResponsavel Text
     cpfDoResponsavel Text
     rgDoResponsavel Text
+    
+Registro json
+    nomeCompleto Text
+    nomePetshop Text
+    telefone Text
+    email Text
+    senha Text
+    
 
 |]
 
@@ -36,13 +44,15 @@ staticFiles "static"
 
 mkYesodData "Pagina" pRoutes
 
+mkMessage "Pagina" "messages" "pt-br"
+
 instance YesodPersist Pagina where
    type YesodPersistBackend Pagina = SqlBackend
    runDB f = do
        master <- getYesod
        let pool = connPool master
        runSqlPool f pool
-
+       
 instance Yesod Pagina where
 
 type Form a = Html -> MForm Handler (FormResult a, Widget)
