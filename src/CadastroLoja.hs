@@ -90,11 +90,11 @@ getChecarLojaR :: LojaId -> Handler Html
 getChecarLojaR pid = do
     loja <- runDB $ get404 pid
     defaultLayout [whamlet|
-        <p><b> Nome Fantasia: #{lojaNomeFantasia loja}  
-        <p><b> CNPJ: #{lojaCnpj loja}
-        <p><b> Endereço: #{lojaLogradouro loja}, #{lojaNumero loja}, #{lojaCep loja} - #{lojaBairro loja} - #{lojaCidade loja} - #{lojaEstado loja}
-        <p><b> Contato: #{lojaTelefone loja} - #{lojaEmail loja}
-        <p><b> Responsável: #{lojaNomeDoResponsavel loja} / RG: #{lojaRgDoResponsavel loja} / CPF: #{lojaCpfDoResponsavel loja}
+        <p><b> _{MsgNomeFantasia}: #{lojaNomeFantasia loja}  
+        <p><b> _{MsgCnpj}: #{lojaCnpj loja}
+        <p><b> _{MsgEndereco}: #{lojaLogradouro loja}, #{lojaNumero loja}, #{lojaCep loja} - #{lojaBairro loja} - #{lojaCidade loja} - #{lojaEstado loja}
+        <p><b> _{MsgContato}: #{lojaTelefone loja} - #{lojaEmail loja}
+        <p><b> _{MsgResponsavel}: #{lojaNomeDoResponsavel loja} / RG: #{lojaRgDoResponsavel loja} / CPF: #{lojaCpfDoResponsavel loja}
         
     |]
 
