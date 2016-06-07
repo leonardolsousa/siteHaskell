@@ -54,6 +54,13 @@ formLoja = let
            areq textField  rg  Nothing
 
 
+getHomeR :: Handler Html
+getHomeR = defaultLayout $ do
+                addStylesheet $ StaticR style_css
+                $(whamletFile "templates/menu.hamlet")
+                $(whamletFile "templates/home.hamlet")
+
+
 getLojaR :: Handler Html
 getLojaR = do
            (widget, enctype) <- generateFormPost formLoja
@@ -87,8 +94,6 @@ getLojasR = do
                         <li>[#{fromSqlKey id}] #{lojaNomeFantasia loja}
             |]
 
-getHomeR :: Handler Html
-getHomeR = defaultLayout [whamlet|Where's Pet!|]
 
 
 getChecarLojaR :: LojaId -> Handler Html
