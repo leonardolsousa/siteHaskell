@@ -17,36 +17,41 @@ import Database.Persist.Postgresql
 mkYesodDispatch "Pagina" pRoutes
 
 formLoja :: Form Loja
-formLoja = renderDivs $ Loja <$>
-           areq textField (fieldSettingsLabel MsgNomeFantasia) Nothing <*>
-           areq textField  FieldSettings{fsId=Just "hident2",
-                           fsLabel="CNPJ",
+formLoja = let
+             cnpj = (fieldSettingsLabel MsgCnpj){fsId=Just "hident2",
                            fsTooltip= Nothing,
                            fsName= Nothing,
-                           fsAttrs=[("maxlength","18")]} Nothing <*>
+                           fsAttrs=[("maxlength","18")]}
+
+             cep = (fieldSettingsLabel MsgCep){fsId=Just "hident5",
+                           fsTooltip= Nothing,
+                           fsName= Nothing,
+                           fsAttrs=[("maxlength","9")]}
+
+             cpf = (fieldSettingsLabel MsgCpfDoResponsavel){fsId=Just "hident11",
+                           fsTooltip= Nothing,
+                           fsName= Nothing,
+                           fsAttrs=[("maxlength","14")]}
+
+             rg = (fieldSettingsLabel MsgRgDoResponsavel){fsId=Just "hident12",
+                           fsTooltip= Nothing,
+                           fsName= Nothing,
+                           fsAttrs=[("maxlength","12")]}
+           in
+           renderDivs $ Loja <$>
+           areq textField (fieldSettingsLabel MsgNomeFantasia) Nothing <*>
+           areq textField  cnpj Nothing <*>
            areq textField  (fieldSettingsLabel MsgLogradouro) Nothing <*>
            areq textField  (fieldSettingsLabel MsgNumero) Nothing <*>
-           areq textField  FieldSettings{fsId=Just "hident5",
-                           fsLabel="CEP",
-                           fsTooltip= Nothing,
-                           fsName= Nothing,
-                           fsAttrs=[("maxlength","9")]} Nothing <*> 
+           areq textField  cep Nothing <*> 
            areq textField  (fieldSettingsLabel MsgBairro) Nothing <*>
            areq textField  (fieldSettingsLabel MsgCidade) Nothing <*>
            areq textField  (fieldSettingsLabel MsgEstado) Nothing <*>
            areq textField  (fieldSettingsLabel MsgTelefone) Nothing <*>
            areq textField  (fieldSettingsLabel MsgEmail) Nothing <*>
-           areq textField (fieldSettingsLabel MsgNomeDoResponsavel) Nothing <*>
-           areq textField  FieldSettings{fsId=Just "hident11",
-                           fsLabel="CPF do Responsável",
-                           fsTooltip= Nothing,
-                           fsName= Nothing,
-                           fsAttrs=[("maxlength","14")]} Nothing <*>
-           areq textField  FieldSettings{fsId=Just "hident12",
-                           fsLabel="RG do Responsável",
-                           fsTooltip= Nothing,
-                           fsName= Nothing,
-                           fsAttrs=[("maxlength","12")]} Nothing
+           areq textField  (fieldSettingsLabel MsgNomeDoResponsavel) Nothing <*>
+           areq textField  cpf Nothing <*>
+           areq textField  rg  Nothing
 
 
 getLojaR :: Handler Html
@@ -103,4 +108,6 @@ getErroR = defaultLayout [whamlet|
               <p>
                 cadastro deu pau com sucesso
 |]
+
+
 

@@ -1,4 +1,4 @@
-NomeFantasia: Fantasy Store Name
+NomeFantasia: Store Fantasy Name
 Cnpj: CNPJ
 Logradouro: Public Place
 Numero: Number
