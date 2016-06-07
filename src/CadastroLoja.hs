@@ -63,20 +63,11 @@ getHomeR = defaultLayout $ do
 
 getLojaR :: Handler Html
 getLojaR = do
-           (widget, enctype) <- generateFormPost formLoja
-           defaultLayout $ do 
-           toWidget [cassius|
-               label
-                   color:black;
-                   font-weight: bold;
-           |]
-           [whamlet|
-           
-                 <form method=post enctype=#{enctype} action=@{LojaR}>
-                     ^{widget}
-                     <input type="submit" value="Enviar">
-                     
-           |]
+            (widget, enctype) <- generateFormPost formLoja
+            defaultLayout $ do
+                addStylesheet $ StaticR style_css
+                $(whamletFile "templates/menu.hamlet")
+                $(whamletFile "templates/cadastrarLoja.hamlet")
 
 postLojaR :: Handler Html
 postLojaR = do
