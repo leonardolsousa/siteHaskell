@@ -106,7 +106,7 @@ getChecarLojaR pid = do
 getErroR :: Handler Html
 getErroR = defaultLayout [whamlet|
               <p>
-                cadastro deu pau com sucesso
+               _{MsgErro}
 |]
 
 

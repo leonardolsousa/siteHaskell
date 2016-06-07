@@ -14,4 +14,4 @@ NomeDoResponsavel: Name des verantwortlichen
 CpfDoResponsavel: CPF des verantwortlichen
 RgDoResponsavel: RG des verantwortlichen
 Responsavel: Verantwortlicher
-
+Erro: Fehler bei der Anmeldung

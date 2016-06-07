@@ -14,4 +14,5 @@ NomeDoResponsavel: Responsibles Name
 CpfDoResponsavel: Responsibles CPF
 RgDoResponsavel: Responsibles RG
 Responsavel: Responsible
+Erro: Error in registration
 
