@@ -90,14 +90,10 @@ getLojasR = do
 getChecarLojaR :: LojaId -> Handler Html
 getChecarLojaR pid = do
     loja <- runDB $ get404 pid
-    defaultLayout [whamlet|
-        <p><b> _{MsgNomeFantasia}: #{lojaNomeFantasia loja}  
-        <p><b> _{MsgCnpj}: #{lojaCnpj loja}
-        <p><b> _{MsgEndereco}: #{lojaLogradouro loja}, #{lojaNumero loja}, #{lojaCep loja} - #{lojaBairro loja} - #{lojaCidade loja} - #{lojaEstado loja}
-        <p><b> _{MsgContato}: #{lojaTelefone loja} - #{lojaEmail loja}
-        <p><b> _{MsgResponsavel}: #{lojaNomeDoResponsavel loja} / RG: #{lojaRgDoResponsavel loja} / CPF: #{lojaCpfDoResponsavel loja}
-        
-    |]
+    defaultLayout $ do
+        addStylesheet $ StaticR style_css
+        $(whamletFile "templates/menu.hamlet")
+        $(whamletFile "templates/checarLoja.hamlet")
 
 getErroR :: Handler Html
 getErroR = defaultLayout [whamlet|
