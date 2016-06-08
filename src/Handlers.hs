@@ -212,3 +212,13 @@ getRegistroR = do
                              $forall Entity id Registro <- Registro
                                   <li>[#{fromSqlKey id}] #{RegistroNomeFantasia Registro}
                  |]
+                 
+getCheckRegistroR :: RegistroId -> Handler Html
+getCheckRegistroR pid = do
+      registro <- runDB $ get404 pid
+      defaultLayout [whamlet|
+            <p><b> Nome Completo: #{registroNomeCompleto registro} 
+            <p><b> Nome PetShop: #{registroNomePetShop registro}
+            <p><b> Telefone: #{registroTelefone registro}
+            <p><b> E-mail: #{registroEmail registro} 
+      |]
