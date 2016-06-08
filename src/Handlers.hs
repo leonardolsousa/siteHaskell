@@ -222,3 +222,9 @@ getCheckRegistroR pid = do
             <p><b> Telefone: #{registroTelefone registro}
             <p><b> E-mail: #{registroEmail registro} 
       |]
+      
+getErroUsuarioR :: Handler Html
+getErroUsuarioR = defaultLayout [whamlet|
+                    <p>
+                        Usuário não foi registrado.<b> Tente Novamente.
+|]
