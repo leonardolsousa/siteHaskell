@@ -180,3 +180,19 @@ getLogoutR = do
          <h1> ADEUS!
      |]
      
+getRegistroR :: Handler Html
+getRegistroR = do
+                (widget, enctype) <- generateFormPost formRegistro
+                defaultLayout $ do 
+                toWidget [cassius|
+                       label
+                            color:black;
+                            font-weight: bold;
+                |]
+                [whamlet|
+
+                          <form method=post enctype=#{enctype} action=@{RegistroR}>
+                                ^{widget}
+                                <input type="submit" value="Criar conta no Where's Pet">
+
+                |]     
