@@ -196,3 +196,19 @@ getRegistroR = do
                                 <input type="submit" value="Criar conta no Where's Pet">
 
                 |]     
+                
+postRegistroR :: Handler Html
+postRegistroR = do
+               ((result, _), _) <- runFormPost formRegistro
+               case result of 
+                     FormSuccess Registro -> (runDB $ insert Registro) >>= \piid -> redirect (CheckRegistroR piid)
+                     _ -> redirect ErroUsuarioR
+
+getRegistroR :: Handler Html
+getRegistroR = do
+                 Registro <- runDB $ selectList ([]::[Filter Registro]) []
+                 defaultLayout $ [whamlet|
+                       <ul>
+                             $forall Entity id Registro <- Registro
+                                  <li>[#{fromSqlKey id}] #{RegistroNomeFantasia Registro}
+                 |]
