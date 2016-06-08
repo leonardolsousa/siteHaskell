@@ -15,4 +15,8 @@ pRoutes = [parseRoutes|
    /perfil/#UsersId PerfilR GET
    /admin AdminR GET
    /logout LogoutR GET
+   /registro/registro RegistroR GET POST
+   /registro/check/#RegistroId CheckRegistroR GET
+   /registro RegistroR GET
+   /erroregistro ErroUsuarioR GET
 |]
