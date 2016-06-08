@@ -64,6 +64,6 @@ executable         siteHaskell
                  , vector
                  , time
 
-    other-modules: CadastroLoja,
-                   Rotas,
-                   Tabelas
+    other-modules: Foundation,
+                   Import,
+                   Handlers

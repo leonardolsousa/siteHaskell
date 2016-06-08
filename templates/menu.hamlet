@@ -1,5 +1,9 @@
 <ul>
-  <li><a href="">Home
-  <li><a href="loja/cadastro">Cadastro Loja
-  <li><a href="lojas">Lojas
-  <li><a href="#sobre">Sobre
+  <li>
+    <a href="@{HomeR}">Home
+  <li>
+    <a href="@{LojaR}">Cadastro Loja
+  <li>
+    <a href="@{LojasR}">Lojas
+  <li>
+    <a href="">Sobre

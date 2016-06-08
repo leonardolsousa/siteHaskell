@@ -6,16 +6,16 @@
 module Main where
 
 
+import Import
 import Yesod
 import Yesod.Static
-import Database.Persist.Postgresql
-import Data.Text
+import Foundation
+import Handlers
 import Control.Monad.Logger (runStdoutLoggingT)
 import Control.Applicative
+import Data.Text
+import Database.Persist.Postgresql
 
-import Rotas
-import Tabelas
-import CadastroLoja
 
 
 connStr = "dbname=d6u0i7sja7bad0 host=ec2-54-243-249-176.compute-1.amazonaws.com user=pibvccpjrprgfb password=nMw0gAWUxdfJkNiL38JKbkuOBo port=5432"
