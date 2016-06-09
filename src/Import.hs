@@ -7,13 +7,15 @@ pRoutes = [parseRoutes|
    /loja/cadastro LojaR GET POST
    /loja/checar/#LojaId ChecarLojaR GET
    /lojas LojasR GET
+   /procedimentos/cadastro ProcedimentosR GET POST
+   /procedimentos/checar/#ProcedimentosId ChecarProcedimentosR GET
+   /fornecedores/cadastro FornecedoresR GET POST
+   /fornecedores/checar/#FornecedoresId ChecarFornecedoresR GET
+   /produtos/cadastro ProdutosR GET POST
+   /produtos/checar/#ProdutosId ChecarProdutosR GET
+   /sobre SobreR GET
    /erro ErroR GET
    /static StaticR Static getStatic
-   /login LoginR GET POST
-   /erroCadastro ErroCadR GET
-   /usuario UsuarioR GET POST
-   /perfil/#UsersId PerfilR GET
-   /admin AdminR GET
-   /logout LogoutR GET
+   
 
 |]

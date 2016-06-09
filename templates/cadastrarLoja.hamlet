@@ -1,10 +1,31 @@
-<section>
-    <div id="main">
-        <div class="main-content">
-            <h1 class="titulo">Cadastro de Pet Shop
-            <fieldset>
-                <legend>Preencha o formulário: 
-                <form method=post id="form-loja" enctype=#{enctype} action=@{LojaR}>
-                    ^{widget}
-                    <input type="submit" value="Cadastrar" class="submit">
-                    <span class="clearfix">
+<div class="container">  
+  <form method=post id="form-loja" enctype=#{enctype} action=@{LojaR}>
+    <h3 class="título">_{MsgCadastroLoja}
+    <fieldset>
+      <input placeholder=_{MsgNomeFantasia} type="text" tabindex="1" required>
+    <fieldset>
+      <input placeholder=_{MsgCnpj} type="text" tabindex="2" required>
+    <fieldset>
+      <input placeholder=_{MsgLogradouro} type="text" tabindex="3" required>
+    <fieldset>
+      <input placeholder=_{MsgNumero} type="text" tabindex="4" required>
+    <fieldset>
+      <input placeholder=_{MsgCep} type="text" tabindex="5" required>
+        <fieldset>
+      <input placeholder=_{MsgBairro} type="text" tabindex="6" required>
+        <fieldset>
+      <input placeholder=_{MsgCidade} type="text" tabindex="7" required>
+        <fieldset>
+      <input placeholder=_{MsgEstado} type="text" tabindex="8" required>
+    <fieldset>
+      <input placeholder=_{MsgTelefone} type="tel" tabindex="9" required>
+        <fieldset>
+      <input placeholder=_{MsgEmail} type="email" tabindex="10" required>
+        <fieldset>
+      <input placeholder=_{MsgNomeDoResponsavel} type="text" tabindex="11" required>
+        <fieldset>
+      <input placeholder=_{MsgCpfDoResponsavel} type="text" tabindex="12" required>
+        <fieldset>
+      <input placeholder=_{MsgRgDoResponsavel} type="text" tabindex="13" required>
+       ^{widget}
+             <input type="submit" value="Salvar" class="submit">

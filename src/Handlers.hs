@@ -50,30 +50,52 @@ formLoja = let
            areq textField  cpf Nothing <*>
            areq textField  rg  Nothing
 
+---------------------------------------------------------------------------------------
 
+formProcedimentos :: Form Procedimentos
+formProcedimentos = renderDivs $ Procedimentos <$>
+           areq textField (fieldSettingsLabel MsgProcedimentos) Nothing 
+   
+---------------------------------------------------------------------------------------
+
+formFornecedores :: Form Fornecedores
+formFornecedores = let
+             cnpj = (fieldSettingsLabel MsgCnpjFornecedor){fsId=Just "hident2",
+                           fsTooltip= Nothing,
+                           fsName= Nothing,
+                           fsAttrs=[("maxlength","18")]}
+
+           in
+           renderDivs $ Fornecedores <$>
+           areq textField (fieldSettingsLabel MsgNomeFornecedor) Nothing <*>
+           areq textField cnpj Nothing <*>
+           areq textField (fieldSettingsLabel MsgTelefoneFornecedor) Nothing <*>
+           areq textField (fieldSettingsLabel MsgEmail) Nothing 
+
+---------------------------------------------------------------------------------------
+
+formProdutos :: Form Produtos
+formProdutos = renderDivs $ Produtos <$>
+               areq textField (fieldSettingsLabel MsgProdutos) Nothing
+
+---------------------------------------------------------------------------------------
+       
 getHomeR :: Handler Html
 getHomeR = defaultLayout $ do
-                addStylesheet $ StaticR style_css
-                $(whamletFile "templates/menu.hamlet")
-                $(whamletFile "templates/home.hamlet")
+           addStylesheet $ StaticR style_css
+           $(whamletFile "templates/menu.hamlet")
+           $(whamletFile "templates/home.hamlet")
 
+--------------------------------------------------------------------------------------
 
 getLojaR :: Handler Html
-getLojaR = do
+getLojaR = do 
            (widget, enctype) <- generateFormPost formLoja
-           defaultLayout $ do 
-           toWidget [cassius|
-               label
-                   color:black;
-                   font-weight: bold;
-           |]
-           [whamlet|
-           
-                 <form method=post enctype=#{enctype} action=@{LojaR}>
-                     ^{widget}
-                     <input type="submit" value="Enviar">
-                     
-           |]
+           defaultLayout $ do
+           addStylesheet $ StaticR style_css
+           $(whamletFile "templates/menu.hamlet")
+           $(whamletFile "templates/cadastrarLoja.hamlet")
+
 
 postLojaR :: Handler Html
 postLojaR = do
@@ -81,6 +103,16 @@ postLojaR = do
            case result of 
                FormSuccess loja -> (runDB $ insert loja) >>= \piid -> redirect (ChecarLojaR piid)
                _ -> redirect ErroR
+
+{-
+getLojasR :: LojaId -> Handler Html
+getLojasR pid = do 
+                lojas <- runDB $ selectList ([]::[Filter Loja]) []
+                defaultLayout $ do
+                addStylesheet $ StaticR style_css
+                $(whamletFile "templates/menu.hamlet")
+                $(whamletFile "templates/lojas.hamlet")-}
+
 
 getLojasR :: Handler Html
 getLojasR = do
@@ -92,7 +124,15 @@ getLojasR = do
             |]
 
 
+getChecarLojaR :: LojaId -> Handler Html
+getChecarLojaR pid = do
+       loja <- runDB $ get404 pid
+       defaultLayout $ do
+       addStylesheet $ StaticR style_css
+       $(whamletFile "templates/menu.hamlet")
+       $(whamletFile "templates/checarLoja.hamlet")
 
+{-
 getChecarLojaR :: LojaId -> Handler Html
 getChecarLojaR pid = do
     loja <- runDB $ get404 pid
@@ -103,79 +143,104 @@ getChecarLojaR pid = do
         <p><b> _{MsgContato}: #{lojaTelefone loja} - #{lojaEmail loja}
         <p><b> _{MsgResponsavel}: #{lojaNomeDoResponsavel loja} / RG: #{lojaRgDoResponsavel loja} / CPF: #{lojaCpfDoResponsavel loja}
         
-    |]
+    |]-}
 
-getErroR :: Handler Html
-getErroR = defaultLayout [whamlet|
-              <p>
-               _{MsgErro}
-|]
+-------------------------------------------------------------------------------------------------
 
-formUser :: Form Users
-formUser = renderDivs $ Users <$>
-           areq textField "Nome: " Nothing <*>
-           areq textField "Login: " Nothing <*>
-           areq passwordField "Senha: " Nothing
+getProcedimentosR :: Handler Html
+getProcedimentosR = do 
+                (widget, enctype) <- generateFormPost formProcedimentos
+                defaultLayout $ do
+                addStylesheet $ StaticR style_css
+                $(whamletFile "templates/menu.hamlet")
+                $(whamletFile "templates/procedimentos.hamlet")
 
-formLogin :: Form (Text,Text)
-formLogin = renderDivs $ (,) <$>
-           areq textField "Login: " Nothing <*>
-           areq passwordField "Senha: " Nothing
 
-getUsuarioR :: Handler Html
-getUsuarioR = do
-           (widget, enctype) <- generateFormPost formUser
-           defaultLayout [whamlet|
-                 <form method=post enctype=#{enctype} action=@{UsuarioR}>
-                     ^{widget}
-                     <input type="submit" value="Enviar">
-           |]
-
-getPerfilR :: UsersId -> Handler Html
-getPerfilR uid = do
-      user <- runDB $ get404 uid
-      defaultLayout $ do
-          toWidget $ $(luciusFile "templates/perfil.lucius")
-          $(whamletFile "templates/perfil.hamlet")
-
-postUsuarioR :: Handler Html
-postUsuarioR = do
-           ((result, _), _) <- runFormPost formUser
+postProcedimentosR :: Handler Html
+postProcedimentosR = do
+           ((result, _), _) <- runFormPost formProcedimentos
            case result of 
-               FormSuccess user -> (runDB $ insert user) >>= \piid -> redirect (PerfilR piid)
+               FormSuccess procedimento -> (runDB $ insert procedimento) >>= \piid -> redirect (ChecarProcedimentosR piid)
                _ -> redirect ErroR
 
 
-getAdminR :: Handler Html
-getAdminR = defaultLayout [whamlet|
-    <h1> Bem-vindo meu Rei!
-|]
+getChecarProcedimentosR :: ProcedimentosId -> Handler Html
+getChecarProcedimentosR pid = do
+       procedimentos <- runDB $ get404 pid
+       defaultLayout $ do
+       addStylesheet $ StaticR style_css
+       $(whamletFile "templates/menu.hamlet")
+       $(whamletFile "templates/checarProcedimentos.hamlet")
 
-getLoginR :: Handler Html
-getLoginR = do
-           deleteSession "_ID"
-           (widget, enctype) <- generateFormPost formLogin
-           defaultLayout $ $(whamletFile "templates/login.hamlet")
 
-postLoginR :: Handler Html
-postLoginR = do
-           ((result, _), _) <- runFormPost formLogin
+
+--------------------------------------------------------------------------------------------------------------
+
+getFornecedoresR :: Handler Html
+getFornecedoresR = do 
+                (widget, enctype) <- generateFormPost formFornecedores
+                defaultLayout $ do
+                addStylesheet $ StaticR style_css
+                $(whamletFile "templates/menu.hamlet")
+                $(whamletFile "templates/cadastrarFornecedores.hamlet")
+
+
+postFornecedoresR :: Handler Html
+postFornecedoresR = do
+           ((result, _), _) <- runFormPost formFornecedores
            case result of 
-               FormSuccess ("admin","admin") -> setSession "_ID" "admin" >> redirect AdminR
-               FormSuccess (login,senha) -> do 
-                   user <- runDB $ selectFirst [UsersLogin ==. login, UsersSenha ==. senha] []
-                   case user of
-                       Nothing -> redirect LoginR
-                       Just (Entity pid u) -> setSession "_ID" (pack $ show $ fromSqlKey pid) >> redirect (PerfilR pid)
+               FormSuccess fornecedor -> (runDB $ insert fornecedor) >>= \piid -> redirect (ChecarFornecedoresR piid)
+               _ -> redirect ErroR
 
-getErroCadR :: Handler Html
-getErroCadR = defaultLayout [whamlet|
-     <h1> Erro de cadastro
-|]
+getChecarFornecedoresR :: FornecedoresId -> Handler Html
+getChecarFornecedoresR pid = do
+       fornecedores <- runDB $ get404 pid
+       defaultLayout $ do
+       addStylesheet $ StaticR style_css
+       $(whamletFile "templates/menu.hamlet")
+       $(whamletFile "templates/checarFornecedores.hamlet")
 
-getLogoutR :: Handler Html
-getLogoutR = do
-     deleteSession "_ID"
-     defaultLayout [whamlet| 
-         <h1> ADEUS!
-     |]
+---------------------------------------------------------------------------------------------------------------
+
+getProdutosR :: Handler Html
+getProdutosR = do 
+                (widget, enctype) <- generateFormPost formProdutos
+                defaultLayout $ do
+                addStylesheet $ StaticR style_css
+                $(whamletFile "templates/menu.hamlet")
+                $(whamletFile "templates/cadastrarProdutos.hamlet")
+
+
+postProdutosR :: Handler Html
+postProdutosR = do
+           ((result, _), _) <- runFormPost formProdutos
+           case result of 
+               FormSuccess produto -> (runDB $ insert produto) >>= \piid -> redirect (ChecarProdutosR piid)
+               _ -> redirect ErroR
+
+
+getChecarProdutosR :: ProdutosId -> Handler Html
+getChecarProdutosR pid = do
+       produtos <- runDB $ get404 pid
+       defaultLayout $ do
+       addStylesheet $ StaticR style_css
+       $(whamletFile "templates/menu.hamlet")
+       $(whamletFile "templates/checarProdutos.hamlet")
+
+
+-----------------------------------------------------------------------------------------------
+
+getErroR :: Handler Html
+getErroR = defaultLayout $ do
+           addStylesheet $ StaticR style_css
+           $(whamletFile "templates/menu.hamlet")
+           $(whamletFile "templates/erro.hamlet")
+
+-----------------------------------------------------------------------------------------------
+                
+getSobreR :: Handler Html
+getSobreR = defaultLayout $ do
+            addStylesheet $ StaticR style_css
+            $(whamletFile "templates/menu.hamlet")
+            $(whamletFile "templates/sobre.hamlet")
+

@@ -13,3 +13,4 @@
             <p>Nome do Responsável : #{lojaNomeDoResponsavel loja}
             <p>CPF do Responsável : #{lojaCpfDoResponsavel loja}
             <p>RG do Responsável : #{lojaRgDoResponsavel loja}
+            

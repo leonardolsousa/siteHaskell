@@ -1,0 +1,14 @@
+<div class="container">  
+  <form method=post id="form-procedimentos" enctype=#{enctype} action=@{ProcedimentosR}>
+    <h3 class="título">_{MsgCadastroProcedimento}
+    <fieldset>
+      <textarea placeholder=_{MsgMensagem} tabindex="1" required>
+    <fieldset>
+      <textarea placeholder=_{MsgMensagem} tabindex="2" required>
+    <fieldset>
+      <textarea placeholder=_{MsgMensagem} tabindex="3" required>
+    <fieldset>
+      <textarea placeholder=_{MsgMensagem} tabindex="4" required>
+    <fieldset>
+      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">_{MsgCadastroProcedimento}                                
+      

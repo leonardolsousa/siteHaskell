@@ -1,13 +1,12 @@
-<h1> Where's Pet
 
-<h2> Empresa: 
+<h1 style="text-align:center"> 
+    Where's Pet
+<br><br>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras efficitur dolor eget nisl tincidunt porttitor sit amet at metus. Fusce non lectus sed diam vestibulum eleifend. Nunc vel finibus nunc. Donec venenatis, nulla nec pulvinar condimentum, justo tellus lacinia dolor, at egestas risus mi nec velit. Pellentesque eget turpis dignissim, lobortis nisl eu, tristique mi. Sed sollicitudin, metus quis feugiat tincidunt, enim orci fringilla magna, sit amet scelerisque magna arcu eget dolor. Morbi facilisis vehicula cursus. Fusce congue vestibulum neque, in sagittis mi rhoncus sed.
 
-<p>Quisque bibendum ante id dolor iaculis cursus. Mauris iaculis ipsum sapien, ut laoreet turpis volutpat at. Suspendisse vel mi vehicula, convallis felis vel, tristique mauris. In hac habitasse platea dictumst. Nulla facilisi. Fusce metus nibh, iaculis ut nibh suscipit, gravida sodales dolor. Nullam venenatis dui a rhoncus tincidunt.
 
-<p>Nullam ipsum nisi, facilisis eget mi ac, laoreet luctus eros. Nunc quam massa, accumsan sit amet feugiat eu, posuere at arcu. Phasellus in turpis eget ipsum posuere consequat a non erat. Nam dignissim ut lacus in aliquet. In hac habitasse platea dictumst. Donec tincidunt leo ac erat mattis semper. Nulla sed metus lorem. Mauris consectetur nisl id ipsum congue bibendum. Praesent euismod auctor magna. Etiam quis mattis neque, vel varius erat. Vestibulum commodo lobortis turpis at laoreet. Nunc faucibus elit in felis tristique, ac malesuada odio dictum. Vestibulum in nisi nulla. Aenean nulla mi, condimentum at ligula sed, vehicula dapibus lectus.
-
-<p>Morbi non viverra felis. Quisque posuere vehicula maximus. Nunc turpis dolor, egestas et ligula sed, pretium feugiat tellus. Morbi finibus ligula est, a laoreet erat suscipit eu. Phasellus malesuada, eros at pellentesque viverra, orci risus semper mauris, sit amet malesuada augue sapien eu augue. Nulla ac dictum justo. Suspendisse nec nulla non orci eleifend venenatis. Phasellus ut neque ex. Integer lectus mauris, commodo sed egestas in, laoreet at augue.
-
-<p>Nulla tempus feugiat nisi ut accumsan. Integer imperdiet ultricies risus, venenatis facilisis neque porta id. Pellentesque vitae felis at elit accumsan cursus. Donec vestibulum nulla mollis condimentum commodo. Duis ut commodo neque. Vivamus dignissim eleifend facilisis. Aliquam fermentum condimentum tincidunt. Fusce sagittis neque nisl, non dapibus lacus pellentesque nec.
+<h2 style="text-align:center"> 
+    _{MsgOla}
+    
+ 
+<img src=@{StaticR wherepet_jpg}" width="220" height="220" alt="logo de 220 por 220 pixel" id="imgpos">    

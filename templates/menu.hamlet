@@ -2,8 +2,13 @@
   <li>
     <a href="@{HomeR}">Home
   <li>
-    <a href="@{LojaR}">Cadastro Loja
+    <a href="@{LojaR}">_{MsgMenuLoja}
   <li>
-    <a href="@{LojasR}">Lojas
+    <a href="@{ProcedimentosR}">_{MsgMenuProcedimento}
   <li>
-    <a href="">Sobre
+    <a href="@{FornecedoresR}">_{MsgMenuFornecedor}
+  <li>
+    <a href="@{ProdutosR}">_{MsgMenuProduto}
+  <li>
+    <a href="@{SobreR}">_{MsgMenuSobre}
+    

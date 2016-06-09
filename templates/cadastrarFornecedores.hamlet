@@ -1,0 +1,21 @@
+    
+    
+
+
+
+
+
+<div class="container">
+  <form method=post id="form-fornecedores" enctype=#{enctype} action=@{FornecedoresR}>
+    <h3 class="titulo">_{MsgCadastroFornecedor}
+      <fieldset>
+        <input placeholder=_{MsgNomeFornecedor} type="text" tabindex="1" required>
+      <fieldset>
+        <input placeholder=_{MsgCnpjFornecedor} type="text" tabindex="2" required>
+      <fieldset>
+        <input placeholder=_{MsgTelefoneFornecedor} type="text" tabindex="3" required>
+      <fieldset>
+        <input placeholder=_{MsgEmailFornecedor} type="text" tabindex="4" required>
+      <fieldset>      
+        ^{widget}
+        <input type="submit" value="Salvar" class="submit">

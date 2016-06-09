@@ -2,6 +2,7 @@
              TemplateHaskell, GADTs, FlexibleContexts,
              MultiParamTypeClasses, DeriveDataTypeable,
              GeneralizedNewtypeDeriving, ViewPatterns #-}
+             
 module Foundation where
 import Import
 import Yesod
@@ -13,6 +14,7 @@ import Database.Persist.Postgresql
 data Pagina = Pagina {getStatic :: Static, connPool :: ConnectionPool }
 
 share [mkPersist sqlSettings, mkMigrate "migrateAll"] [persistLowerCase|
+
 Loja json
     nomeFantasia Text
     cnpj Text
@@ -27,21 +29,22 @@ Loja json
     nomeDoResponsavel Text
     cpfDoResponsavel Text
     rgDoResponsavel Text
+    deriving Show
     
-Registro json
-    nomeCompleto Text
-    nomePetshop Text
-    telefone Text
-    email Text
-    senha Text
+Procedimentos json
+    servicos Text
+    deriving Show
     
-Users json
-   nome Text
-   login Text
-   senha Text
-   UniqueUsers login
-   deriving Show
-    
+Fornecedores json
+    nomeFornecedor Text
+    cnpjFornecedor Text
+    telefoneFornecedor Text
+    emailFornecedor Text
+    deriving Show
+
+Produtos json
+    tipos Text
+    deriving Show
 
 |]
 
@@ -59,32 +62,6 @@ instance YesodPersist Pagina where
        runSqlPool f pool
        
 instance Yesod Pagina where
---------------------------------------TESTE-------------------------------------
-
-    authRoute _ = Just LoginR
-    
-    isAuthorized LoginR _ = return Authorized
-    isAuthorized ErroR _ = return Authorized
-    isAuthorized HomeR _ = return Authorized
-    isAuthorized UsuarioR _ = return Authorized
-    isAuthorized AdminR _ = isAdmin
-    isAuthorized _ _ = isUser
-
-isUser = do
-    mu <- lookupSession "_ID"
-    return $ case mu of
-        Nothing -> AuthenticationRequired
-        Just _ -> Authorized
-    
-isAdmin = do
-    mu <- lookupSession "_ID"
-    return $ case mu of
-        Nothing -> AuthenticationRequired
-        Just "admin" -> Authorized 
-        Just _ -> Unauthorized "Voce precisa ser admin para entrar aqui"
-
---------------------------------------TESTE-------------------------------------
-
 
 type Form a = Html -> MForm Handler (FormResult a, Widget)
 

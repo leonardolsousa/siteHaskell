@@ -18,7 +18,7 @@ import Database.Persist.Postgresql
 
 
 
-connStr = "dbname=d6u0i7sja7bad0 host=ec2-54-243-249-176.compute-1.amazonaws.com user=pibvccpjrprgfb password=nMw0gAWUxdfJkNiL38JKbkuOBo port=5432"
+connStr = "dbname=d6eits0lfgc829 host=ec2-54-221-225-242.compute-1.amazonaws.com user=lzpiqwomncxkls password=3oSCMoOnRLv6OZDW6hTlAmIDtE port=5432"
 
 main::IO()
 main = runStdoutLoggingT $ withPostgresqlPool connStr 10 $ \pool -> liftIO $ do 
