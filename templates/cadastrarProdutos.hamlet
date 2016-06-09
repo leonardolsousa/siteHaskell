@@ -1,5 +1,5 @@
 <div class="container">  
-  <form method=post id="form-produtos" enctype=#{enctype} action=@{ProdutosR}>
+  <form method=post id="form-loja" enctype=#{enctype} action=@{ProdutosR}>
     <h3 class="título">_{MsgCadastroProdutos}
     <fieldset>
       <textarea placeholder=_{MsgMensagem} tabindex="1" required>
