@@ -1,0 +1,16 @@
+<section>
+    <div id="main">
+        <div class="main-content">
+            <p>Nome Fantasia : #{lojaNomeFantasia loja}
+            <p>CNPJ : #{lojaCnpj loja}
+            <p>Logradouro : #{lojaLogradouro loja}
+            <p>Número : #{lojaNumero loja}
+            <p>Bairro : #{lojaBairro loja}
+            <p>Cidade : #{lojaCidade loja}
+            <p>Estado : #{lojaEstado loja}
+            <p>Telefone : #{lojaTelefone loja}
+            <p>Email : #{lojaEmail loja}
+            <p>Nome do Responsável : #{lojaNomeDoResponsavel loja}
+            <p>CPF do Responsável : #{lojaCpfDoResponsavel loja}
+            <p>RG do Responsável : #{lojaRgDoResponsavel loja}
+            

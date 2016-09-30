@@ -4,9 +4,9 @@ cabal-version:     >= 1.8
 build-type:        Simple
 
 executable         siteHaskell
-    hs-source-dirs: .
+    hs-source-dirs: src
 
-    main-is:           main.hs
+    main-is:           ../Main.hs
 
     ghc-options:       -threaded -O2 -rtsopts -with-rtsopts=-N
 
@@ -39,10 +39,10 @@ executable         siteHaskell
                  , bytestring                    >= 0.9        && < 0.11
                  , text                          >= 0.11       && < 2.0
                  , persistent                    >= 2.0        && < 2.3
+                 , persistent-postgresql         >= 2.1.1      && < 2.3
                  , persistent-sqlite             >= 2.1.1      && < 2.3
                  , persistent-template           >= 2.0        && < 2.3
-                 , persistent-postgresql         >= 2.1.1      && < 2.3
-                 , template-haskell  
+                 , template-haskell
                  , shakespeare                   >= 2.0        && < 2.1
                  , hjsmin                        >= 0.1        && < 0.2
                  , monad-control                 >= 0.3        && < 1.1
@@ -63,3 +63,7 @@ executable         siteHaskell
                  , containers
                  , vector
                  , time
+
+    other-modules: Foundation,
+                   Import,
+                   Handlers

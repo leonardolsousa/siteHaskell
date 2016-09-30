@@ -1,0 +1,14 @@
+<ul>
+  <li>
+    <a href="@{HomeR}">Home
+  <li>
+    <a href="@{LojaR}">_{MsgMenuLoja}
+  <li>
+    <a href="@{ProcedimentosR}">_{MsgMenuProcedimento}
+  <li>
+    <a href="@{FornecedoresR}">_{MsgMenuFornecedor}
+  <li>
+    <a href="@{ProdutosR}">_{MsgMenuProduto}
+  <li>
+    <a href="@{SobreR}">_{MsgMenuSobre}
+    

@@ -1,0 +1,6 @@
+<div class="container">
+  <form method=post id="form-loja" enctype=#{enctype} action=@{FornecedoresR}>
+    <h3 class="titulo">_{MsgCadastroFornecedor}
+     
+        ^{widget}
+        <input type="submit" value="Salvar" class="submit">

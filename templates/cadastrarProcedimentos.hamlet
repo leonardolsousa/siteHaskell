@@ -1,0 +1,13 @@
+<div class="container">
+  <form method=post id="form-loja" enctype=#{enctype} action=@{ProcedimentosR}>
+    <h3 class="titulo">_{MsgCadastroProcedimento}
+    <fieldset>
+      <textarea placeholder=_{MsgBanho} tabindex="1" required>
+    <fieldset>
+      <textarea placeholder=_{MsgTosa} tabindex="2" required>
+    <fieldset>
+      <textarea placeholder=_{MsgUnha} tabindex="3" required>
+    <fieldset>
+      <textarea placeholder=_{MsgTintura} tabindex="4" required>
+     ^{widget}
+             <input type="submit" value="Salvar" class="submit">
